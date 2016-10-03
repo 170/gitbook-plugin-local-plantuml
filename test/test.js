@@ -15,6 +15,18 @@ describe('PlantUML', function() {
                 assert.equal(result[0].content, '<p>This is a diagram:</p>\n<p><img src="eead78b239eaa9193281a53b7774a21a.png"></p>')
             });
     });
+    it('should correctly replace by img html tag in book root with HTML entities', function() {
+        return tester.builder()
+            .withContent('This is a diagram:\n\n{% plantuml %}\nBob-&gt;Alice : hello\n{% endplantuml %}')
+            .withBookJson({
+                plugins: ['local-plantuml']
+            })
+            .withLocalPlugin(path.join(__dirname, '..'))
+            .create()
+            .then(function(result) {
+                assert.equal(result[0].content, '<p>This is a diagram:</p>\n<p><img src="85c789ca018d288b815e3205d343618e.png"></p>')
+            });
+    });
     it('should correctly replace nested page by img html tag in book root', function() {
         return tester.builder()
             .withBookJson({

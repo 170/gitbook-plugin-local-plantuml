@@ -25,7 +25,7 @@ module.exports = {
         var imageName = hashedImageName(block.body) + ".png";
         this.log.debug("using tempDir ", os.tmpdir());
         var imagePath = path.join(os.tmpdir(), imageName);
-        var umlText = entities.decode(block.body).replace('\\', '');
+        var umlText = entities.decode(block.body).replace(/\\/g, '');
 
         if (fs.existsSync(imagePath)) {
           this.log.info("skipping plantUML image for ", imageName);

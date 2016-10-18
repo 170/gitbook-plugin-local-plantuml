@@ -39,6 +39,7 @@ module.exports = {
               '-Dplantuml.include.path=' + cwd,
               '-Djava.awt.headless=true',
               '-jar', PLANTUML_JAR,
+              '-charset', 'UTF-8',
               '-pipe'
             ],
             {
